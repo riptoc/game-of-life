@@ -21,7 +21,7 @@ def random_gamestate_input(row, col):
         for j in range(col):
             s += random.choice(("#", " "))
         result.append(s)
-    print(result)
+
     return result
 
 
