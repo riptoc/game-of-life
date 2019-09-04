@@ -3,6 +3,14 @@
 """
 import random
 
+GAMESTATE = [
+    "    #",
+    " ##  ",
+    " #   ",
+    " ## #",
+    "   ##"
+]
+
 
 def generate_gamestate(input):
     """
