@@ -1,6 +1,7 @@
 """
     Conway's game of life in python
 """
+import random
 
 
 def generate_gamestate(input):
@@ -10,3 +11,15 @@ def generate_gamestate(input):
     """
     items = [[c for c in i] for i in input]
     return [[1 if i == "#" else 0 for i in j] for j in items]
+
+
+def random_gamestate_input(row, col):
+    result = []
+
+    for i in range(row):
+        s = ""
+        for j in range(col):
+            s += random.choice(("#", " "))
+        result.append(s)
+    print(result)
+    return result
