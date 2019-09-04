@@ -30,3 +30,22 @@ class TestGame(unittest.TestCase):
             # Each string should only contain #s or spaces
             for j in i:
                 self.assertIn(j, ("#", " "))
+
+    def test_count_neighbours(self):
+        """
+            Test counting of a cell's neighbours is correct
+            Test that edge wrapping is working
+        """
+        state = [
+            [0, 0, 0, 1],
+            [1, 1, 0, 1],
+            [1, 1, 1, 1],
+            [1, 0, 0, 1],
+            [0, 0, 1, 1]
+        ]
+
+        self.assertEqual(gol.count_neighbours(1, 1, state), 4)
+        self.assertEqual(gol.count_neighbours(2, 2, state), 5)
+        self.assertEqual(gol.count_neighbours(3, 0, state), 5)
+        self.assertEqual(gol.count_neighbours(4, 3, state), 4)
+        self.assertEqual(gol.count_neighbours(0, 0, state), 5)
