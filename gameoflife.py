@@ -49,3 +49,20 @@ def count_neighbours(row, col, gamestate):
         i += 1
     total -= gamestate[row][col]
     return total
+
+
+def get_next_cellstate(cellstate, num_neighbours):
+    """Calculate a cell's next state based on number of live neighbours"""
+    # If cell is alive
+    if cellstate == 1:
+        # Any live cell with two or three live neighbours lives
+        if num_neighbours in [2, 3]:
+            return 1
+        # Any other state dies
+        return 0
+    # If cell is dead, any dead cell with exactly three live
+    # neighbours becomes a live cell
+    if num_neighbours == 3:
+        return 1
+    # Anything else stays dead
+    return 0

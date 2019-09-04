@@ -50,6 +50,27 @@ class TestGame(unittest.TestCase):
         self.assertEqual(gol.count_neighbours(4, 3, state), 4)
         self.assertEqual(gol.count_neighbours(0, 0, state), 5)
 
+    # Tests calculating the next cellstate
+    def test_live_dies_with_under_2_live_neighbours(self):
+        self.assertEqual(gol.get_next_cellstate(1, 1), 0)
+        self.assertEqual(gol.get_next_cellstate(1, 0), 0)
+
+    def test_live_cell_dies_with_over_3_live_neighbours(self):
+        self.assertEqual(gol.get_next_cellstate(1, 4), 0)
+        self.assertEqual(gol.get_next_cellstate(1, 6), 0)
+
+    def test_live_cell_with_2_or_3_neighbours_lives(self):
+        self.assertEqual(gol.get_next_cellstate(1, 2), 1)
+        self.assertEqual(gol.get_next_cellstate(1, 3), 1)
+
+    def test_dead_cell_with_3_neighbours_becomes_live(self):
+        self.assertEqual(gol.get_next_cellstate(0, 3), 1)
+
+    def test_dead_cell_with_not_3_neighbous_stays_dead(self):
+        self.assertEqual(gol.get_next_cellstate(0, 2), 0)
+        self.assertEqual(gol.get_next_cellstate(0, 0), 0)
+        self.assertEqual(gol.get_next_cellstate(0, 4), 0)
+
 
 if __name__ == '__main__':
     unittest.main()
