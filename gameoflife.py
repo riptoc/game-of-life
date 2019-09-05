@@ -93,7 +93,7 @@ def main():
 
     # Pygame setup
     pygame.init()
-    framerate = 5
+    framerate = 10
     # Screen size
     screen = pygame.display.set_mode((len(gamestate[0]) * 10, len(gamestate * 10)))
     # Initialise clock
