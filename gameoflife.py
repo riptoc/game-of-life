@@ -33,7 +33,7 @@ def random_gamestate_input(row, col):
     return result
 
 
-def count_neighbours(row, col, gamestate):
+def live_neighbours(row, col, gamestate):
     """Count the live neighbours of a cell"""
     num_rows = len(gamestate)
     num_cols = len(gamestate[0])
@@ -59,7 +59,11 @@ def count_neighbours(row, col, gamestate):
     return total
 
 
-def get_next_cellstate(cellstate, num_neighbours):
+def get_next_gamestate(gs):
+    return [[next_cellstate(j, live_neighbours(x, y, gs)) for y, j in enumerate(i)] for x, i in enumerate(gs)]
+
+
+def next_cellstate(cellstate, num_neighbours):
     """Calculate a cell's next state based on number of live neighbours"""
     # If cell is alive
     if cellstate == 1:
