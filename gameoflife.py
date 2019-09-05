@@ -3,13 +3,7 @@
 """
 import random
 
-GAMESTATE = [
-    "    #",
-    " ##  ",
-    " #   ",
-    " ## #",
-    "   ##"
-]
+import pygame
 
 
 def generate_gamestate(input):
@@ -78,3 +72,63 @@ def next_cellstate(cellstate, num_neighbours):
         return 1
     # Anything else stays dead
     return 0
+
+
+# Main loop
+def main():
+    # Main program starts here
+    gs_input = [
+        "      ",
+        "   #  ",
+        "   #  ",
+        "   #  ",
+        "      ",
+    ]
+    gamestate = generate_gamestate(gs_input)
+
+    # Random gamestate
+    # gamestate = generate_gamestate(random_gamestate_input(48, 64))
+
+    # Pygame setup
+    pygame.init()
+    # Screen size
+    screen = pygame.display.set_mode((640, 480))
+    # Initialise clock
+    clock = pygame.time.Clock()
+    # Colours
+    bg = (200, 200, 200)
+    fg = (50, 50, 50)
+    # Cell sizes
+    width = 10
+    height = 10
+    done = False
+    while not done:
+        # Event loop
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+            # Press q to quit
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_q:
+                done = True
+        # Set the bg colour
+        screen.fill(bg)
+        # Draw the cells
+        i = 0
+        while i < len(gamestate):
+            j = 0
+            while j < len(gamestate[0]):
+                # Draw next state to screen
+                colour = bg if gamestate[i][j] == 0 else fg
+                pygame.draw.rect(screen, colour, [j * 10, i * 10, width, height])
+                j += 1
+            i += 1
+            gamestate = get_next_gamestate(gamestate)
+        # Update the screen
+        pygame.display.flip()
+        # Set the framerate
+        clock.tick(4)
+    # Exit pygame properly
+    pygame.quit()
+
+
+main()
