@@ -7,10 +7,10 @@ class TestGame(unittest.TestCase):
     def test_generate_gamestate(self):
         """Test gamestate is correctly initialised from input"""
         input = [
-            "# #  ",
-            "  # #",
-            "###  ",
-            "# # #"
+            "#-#--",
+            "--#-#",
+            "###--",
+            "#-#-#"
         ]
         result = [
             [1, 0, 1, 0, 0],
@@ -29,7 +29,7 @@ class TestGame(unittest.TestCase):
             self.assertIsInstance(i, str)
             # Each string should only contain #s or spaces
             for j in i:
-                self.assertIn(j, ("#", " "))
+                self.assertIn(j, ("#", "-"))
 
     def test_count_neighbours(self):
         """

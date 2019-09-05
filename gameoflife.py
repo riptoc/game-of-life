@@ -9,7 +9,7 @@ import pygame
 def generate_gamestate(input):
     """
         Generate gamestate as 2d array from input
-        eg. "# ## " -> [1,0,1,1,0]
+        eg. "#-##-" -> [1,0,1,1,0]
     """
     items = [[c for c in i] for i in input]
     return [[1 if i == "#" else 0 for i in j] for j in items]
@@ -22,7 +22,7 @@ def random_gamestate_input(row, col):
     for i in range(row):
         s = ""
         for j in range(col):
-            s += random.choice(("#", " "))
+            s += random.choice(("#", "-"))
         result.append(s)
 
     return result
@@ -83,21 +83,21 @@ def next_cellstate(cellstate, num_neighbours):
 def main():
     """ Main program starts here """
     gs_input = [
-        "      ",
-        " ##   ",
-        " ##   ",
-        "   ## ",
-        "   ## ",
-        "      ",
+        "------",
+        "-##---",
+        "-##---",
+        "---##-",
+        "---##-",
+        "------",
     ]
     gamestate = generate_gamestate(gs_input)
 
     # Random gamestate
-    # gamestate = generate_gamestate(random_gamestate_input(64, 48))
+    # gamestate = generate_gamestate(random_gamestate_input(64, 64))
 
     # Pygame setup
     pygame.init()
-    framerate = 2
+    framerate = 5
     # Screen size
     screen = pygame.display.set_mode((len(gamestate[0]) * 10, len(gamestate * 10)))
     # Initialise clock
