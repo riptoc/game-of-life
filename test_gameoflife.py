@@ -27,7 +27,7 @@ class TestGame(unittest.TestCase):
         # Each list item should be a string
         for i in gol.random_gamestate_input(10, 5):
             self.assertIsInstance(i, str)
-            # Each string should only contain #s or spaces
+            # Each string should only contain #s or -s
             for j in i:
                 self.assertIn(j, ("#", "-"))
 
