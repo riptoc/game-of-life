@@ -16,6 +16,7 @@ def generate_gamestate(input):
 
 
 def random_gamestate_input(row, col):
+    """ Generate a random gamestate input give height/width """
     result = []
 
     for i in range(row):
@@ -28,7 +29,7 @@ def random_gamestate_input(row, col):
 
 
 def live_neighbours(row, col, gamestate):
-    """Count the live neighbours of a cell"""
+    """ Count the live neighbours of a cell """
     num_rows = len(gamestate)
     num_cols = len(gamestate[0])
     total = 0
@@ -54,6 +55,7 @@ def live_neighbours(row, col, gamestate):
 
 
 def get_next_gamestate(gs):
+    """ Generate the next gamestate from the current one """
     return [[next_cellstate(j, live_neighbours(x, y, gs)) for y, j in enumerate(i)] for x, i in enumerate(gs)]
 
 
@@ -76,7 +78,7 @@ def next_cellstate(cellstate, num_neighbours):
 
 # Main loop
 def main():
-    # Main program starts here
+    """ Main program starts here """
     gs_input = [
         "     ",
         "  #  ",
