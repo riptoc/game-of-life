@@ -86,15 +86,7 @@ def next_cellstate(cellstate, num_neighbours):
 # Main loop
 def main():
     """ Main program starts here """
-    gs_input = [
-        "------",
-        "-##---",
-        "-##---",
-        "---##-",
-        "---##-",
-        "------",
-    ]
-    gamestate = generate_gamestate(gs_input)
+    gamestate = generate_gamestate(import_gamestate('gamestate.txt'))
 
     # Random gamestate
     # gamestate = generate_gamestate(random_gamestate_input(64, 64))
