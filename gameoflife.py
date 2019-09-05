@@ -78,11 +78,11 @@ def next_cellstate(cellstate, num_neighbours):
 def main():
     # Main program starts here
     gs_input = [
-        "      ",
-        "   #  ",
-        "   #  ",
-        "   #  ",
-        "      ",
+        "     ",
+        "  #  ",
+        "  #  ",
+        "  #  ",
+        "     ",
     ]
     gamestate = generate_gamestate(gs_input)
 
@@ -92,7 +92,7 @@ def main():
     # Pygame setup
     pygame.init()
     # Screen size
-    screen = pygame.display.set_mode((640, 480))
+    screen = pygame.display.set_mode((len(gamestate) * 10, len(gamestate[0] * 10)))
     # Initialise clock
     clock = pygame.time.Clock()
     # Colours
