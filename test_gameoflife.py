@@ -84,6 +84,21 @@ class TestGame(unittest.TestCase):
         self.assertEqual(gol.next_cellstate(0, 0), 0)
         self.assertEqual(gol.next_cellstate(0, 4), 0)
 
+    def test_gamestate_import_from_file(self):
+        gs = [
+            "------------------",
+            "----#--------#----",
+            "--#-#------#-#----",
+            "---##-------##----",
+            "------------------",
+            "------------------",
+            "----------#-------",
+            "--------#-#-------",
+            "---------##-------",
+            "------------------"
+        ]
+        self.assertEqual(gol.import_gamestate('gamestate.txt'), gs)
+
 
 if __name__ == '__main__':
     unittest.main()

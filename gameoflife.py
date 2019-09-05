@@ -28,6 +28,10 @@ def random_gamestate_input(row, col):
     return result
 
 
+def import_gamestate(file):
+    return [l.rstrip('\n') for l in open(file)]
+
+
 def live_neighbours(row, col, gamestate):
     """ Count the live neighbours of a cell """
     num_rows = len(gamestate)
