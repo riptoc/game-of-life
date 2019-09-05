@@ -35,12 +35,15 @@ def live_neighbours(row, col, gamestate):
     total = 0
     i = -1
     while i < 2:
+        # Count by row
         j = -1
         x = row + i
+        # Wrap around
         if x >= num_rows:
             x = 0
         elif x == -1:
             x = num_rows - 1
+        # Count each col
         while j < 2:
             y = col + j
             if y >= num_cols:
@@ -80,55 +83,61 @@ def next_cellstate(cellstate, num_neighbours):
 def main():
     """ Main program starts here """
     gs_input = [
-        "     ",
-        "  #  ",
-        "  #  ",
-        "  #  ",
-        "     ",
+        "      ",
+        " ##   ",
+        " ##   ",
+        "   ## ",
+        "   ## ",
+        "      ",
     ]
     gamestate = generate_gamestate(gs_input)
 
     # Random gamestate
-    # gamestate = generate_gamestate(random_gamestate_input(48, 64))
+    # gamestate = generate_gamestate(random_gamestate_input(64, 48))
 
     # Pygame setup
     pygame.init()
+    framerate = 2
     # Screen size
-    screen = pygame.display.set_mode((len(gamestate) * 10, len(gamestate[0] * 10)))
+    screen = pygame.display.set_mode((len(gamestate[0]) * 10, len(gamestate * 10)))
     # Initialise clock
     clock = pygame.time.Clock()
     # Colours
     bg = (200, 200, 200)
     fg = (50, 50, 50)
     # Cell sizes
-    width = 10
-    height = 10
+    cell_w = 10
+    cell_h = 10
     done = False
     while not done:
         # Event loop
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                done = True
             # Press q to quit
             if event.type == pygame.KEYDOWN and event.key == pygame.K_q:
                 done = True
+
         # Set the bg colour
         screen.fill(bg)
+
         # Draw the cells
         i = 0
         while i < len(gamestate):
             j = 0
             while j < len(gamestate[0]):
-                # Draw next state to screen
+                # Assign colours to each state
                 colour = bg if gamestate[i][j] == 0 else fg
-                pygame.draw.rect(screen, colour, [j * 10, i * 10, width, height])
+                # Draw next state to screen
+                pygame.draw.rect(screen, colour, [j * 10, i * 10, cell_w, cell_h])
                 j += 1
             i += 1
-            gamestate = get_next_gamestate(gamestate)
+        # Update gamestate
+        gamestate = get_next_gamestate(gamestate)
+
         # Update the screen
         pygame.display.flip()
         # Set the framerate
-        clock.tick(4)
+        clock.tick(framerate)
+
     # Exit pygame properly
     pygame.quit()
 
