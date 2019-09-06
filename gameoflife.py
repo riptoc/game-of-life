@@ -2,6 +2,7 @@
     Conway's game of life in python
 """
 import random
+from sys import argv
 
 import pygame
 
@@ -19,9 +20,9 @@ def random_gamestate_input(row, col):
     """ Generate a random gamestate input give height/width """
     result = []
 
-    for i in range(row):
+    for i in range(col):
         s = ""
-        for j in range(col):
+        for j in range(row):
             s += random.choice(("#", "-"))
         result.append(s)
 
@@ -86,14 +87,17 @@ def next_cellstate(cellstate, num_neighbours):
 # Main loop
 def main():
     """ Main program starts here """
-    gamestate = generate_gamestate(import_gamestate('gamestate.txt'))
-
     # Random gamestate
-    # gamestate = generate_gamestate(random_gamestate_input(64, 64))
+    if len(argv) == 2 and argv[1] == '-r':
+        gamestate = generate_gamestate(random_gamestate_input(64, 64))
+    elif len(argv) == 4 and argv[1] == '-r':
+        gamestate = generate_gamestate(random_gamestate_input(int(argv[2]), int(argv[3])))
+    else:
+        gamestate = generate_gamestate(import_gamestate('gamestate.txt'))
 
     # Pygame setup
     pygame.init()
-    framerate = 10
+    framerate = 20
     # Screen size
     screen = pygame.display.set_mode((len(gamestate[0]) * 10, len(gamestate * 10)))
     # Initialise clock
